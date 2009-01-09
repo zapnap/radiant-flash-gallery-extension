@@ -15,8 +15,8 @@ module FlashGalleryTags
       out += "<param name='movie' value='#{gallery.swf_file_name}' />"
       out += "<param name='quality' value='high' />"
       out += "<param name='menu' value='false' />"
-      out += "<param name='FlashVars' value='xmlFilePath=#{gallery.xml_file_name}&xmlFileType=Default' />"
-      out += "<embed src='#{gallery.swf_file_name}' quality='high' pluginspage='http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' type='application/x-shockwave-flash' menu='false' FlashVars='xmlFilePath=#{gallery.xml_file_name}&xmlFileType=Default'></embed>"
+      out += "<param name='FlashVars' value='xmlFilePath=#{gallery.xml_file_name}' />"
+      out += "<embed src='#{gallery.swf_file_name}' quality='high' pluginspage='http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' type='application/x-shockwave-flash' menu='false' FlashVars='xmlFilePath=#{gallery.xml_file_name}'></embed>"
       out += "</object>"
     else
       raise TagError, "'gallery' tag must contain a valid 'name' attribute."
