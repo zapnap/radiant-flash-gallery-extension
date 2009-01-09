@@ -23,7 +23,8 @@ extension (it limits you to displaying only 3 images/videos).
 
 To use it, copy slideshowpro.swf or your customized version of the SWF
 to the public/galleries directory. You can then add new galleries and
-media items using the administrative interface in Radiant. To display
+media items using the administrative interface in Radiant. Make sure to
+publish the galleries once you're ready to proceed. Then, to display
 them in SSP, just use the supplied Radius tag:
 
 <r:gallery name="gallery_name" />
