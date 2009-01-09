@@ -1,0 +1,54 @@
+- content_for 'page_css' do
+  :sass
+    p.new
+      a
+        color: #000
+        border: 1px solid #ddf
+        padding: 6px
+        text-decoration: none
+
+        &:hover
+          background: #efefff
+
+    th.remove
+      width: 100px
+
+    td.remove
+      width: 100px
+      font-size: 0.8em
+      vertical-align: center
+
+      a
+        text-decoration: none
+        color: #000
+
+      img
+        margin-bottom: 3px
+
+    #content #items.index .page .info
+      top: 0
+
+%h1= "#{@gallery.title} Gallery Items"
+
+%table#items.index{:summary => "Listing of Gallery Items"}
+  %thead
+    %tr
+      %th.title Title
+      %th.link Link
+      %th.modify Modify
+  %tbody
+    - if @gallery_items.empty?
+      %tr
+        %td.note{:colspan => 3} No Gallery Items
+    - else 
+      - @gallery_items.each do |item|
+        %tr.node.level-1{:id => "gallery-item-#{item.id}"}
+          %td.page
+            %span.w1
+              = link_to item.title, edit_admin_gallery_item_url(@gallery, item)
+
+          %td.link= "#{item.link}"
+          %td.remove
+            = link_to("#{image('minus.png')} Remove", admin_gallery_item_url(@gallery, item), :method => :delete, :alt => 'remove gallery item', :confirm => 'Are you sure? This will delete the gallery item!')
+
+%p.new= link_to('New Gallery Item', new_admin_gallery_item_url(@gallery))

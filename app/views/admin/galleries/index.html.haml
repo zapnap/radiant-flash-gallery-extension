@@ -1,0 +1,59 @@
+- content_for 'page_css' do
+  :sass
+    p.buttons
+      a
+        color: #000
+        border: 1px solid #ddf
+        padding: 6px
+        text-decoration: none
+        margin-right: 5px
+
+        &:hover
+          background: #efefff
+
+    th.remove
+      width: 100px
+
+    td.remove, td.add-item
+      width: 100px
+      font-size: 0.8em
+      vertical-align: center
+
+      a
+        text-decoration: none
+        color: #000
+
+      img
+        margin-bottom: 3px
+
+    #content #galleries.index .page .info
+      top: 0
+
+%h1 Flash Galleries
+
+%table#galleries.index{:summary => "Listing of Galleries"}
+  %thead
+    %tr
+      %th.title Title
+      %th.date Assets
+      %th.modify{:colspan => 2} Modify
+  %tbody
+    - if @galleries.empty?
+      %tr
+        %td.note{:colspan => 4} No Galleries
+    - else 
+      - @galleries.each do |gallery|
+        %tr.node.level-1{:id => "gallery-#{gallery.id}"}
+          %td.page
+            %span.w1
+              = link_to gallery.title, edit_admin_gallery_url(gallery)
+
+          %td.gallery= link_to("#{gallery.gallery_items.length} items", admin_gallery_items_url(gallery), :alt => 'view media items in this gallery')
+          %td.add-item
+            = link_to("#{image('plus.png')} Add Item", new_admin_gallery_item_url(gallery), :alt => 'add media item to gallery')
+          %td.remove
+            = link_to("#{image('minus.png')} Remove", admin_gallery_url(gallery), :method => :delete, :alt => 'remove gallery', :confirm => 'Are you sure? This will delete the gallery!')
+
+%p.buttons
+  = link_to('New Gallery', new_admin_gallery_url)
+  = link_to('Publish Galleries', publish_admin_galleries_url)

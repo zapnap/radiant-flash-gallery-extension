@@ -1,0 +1,35 @@
+- content_for 'page_css' do
+  :sass
+    p.title
+      margin: 10px 0 !important
+
+    #content .form-area div.error-with-field
+      input.textbox
+        font-family: Georgia,Palatino,"Times New Roman",Times,serif
+        font-size: 200%
+        width: 100%
+
+    textarea.textarea
+      height: 150px !important
+      width: 100%
+      display: block
+
+%h1= @gallery.new_record? ? 'New Gallery' : 'Edit Gallery'
+
+- form_for [:admin, @gallery] do |f|
+  .form-area
+    %p.title
+      %label Title
+      = f.text_field :title, :class => 'textbox'
+    %p.title
+      %label Description
+      = f.text_area :description, :class => 'textarea'
+    %p.title
+      %label Location of SlideShowPro SWF File
+      = f.text_field :swf_file_name, :class => 'textbox'
+    
+  %p.buttons
+    - button_text = @gallery.new_record? ? 'Create' : 'Save Changes'
+    = submit_tag button_text, :class => 'button'
+    or
+    = link_to 'Cancel', admin_galleries_url

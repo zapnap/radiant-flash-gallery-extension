@@ -1,0 +1,46 @@
+- content_for 'page_css' do
+  :sass
+    p.title
+      margin: 10px 0 !important
+
+    #content .form-area div.error-with-field
+      input.textbox
+        font-family: Georgia,Palatino,"Times New Roman",Times,serif
+        font-size: 200%
+        width: 100%
+
+    input.file
+      margin: 50px 0
+
+    img.asset
+      margin: 5px 0
+      border: 2px solid #fff
+
+    a.asset
+      display: block
+      margin: 5px 0
+
+%h1= @gallery_item.new_record? ? 'New Testimonial' : 'Edit Testimonial'
+
+- form_for_gallery_item(@gallery_item) do |f|
+  .form-area
+    %p.title
+      %label Title
+      = f.text_field :title, :class => 'textbox'
+    %p.title
+      %label Caption
+      = f.text_field :caption, :class => 'textbox'
+    %p.title
+      %label Link
+      = f.text_field :link, :class => 'textbox'
+    %p.title
+      %label Asset
+      = gallery_item_asset_tag(@gallery_item.asset, :class => 'asset') if @gallery_item.asset.exists?
+      %br
+      = f.file_field :asset, :class => 'button'
+    
+  %p.buttons
+    - button_text = @gallery_item.new_record? ? 'Create' : 'Save Changes'
+    = submit_tag button_text, :class => 'button'
+    or
+    = link_to 'Cancel', admin_gallery_items_url(@gallery)

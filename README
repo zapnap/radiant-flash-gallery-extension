@@ -1,0 +1,36 @@
+= Flash Gallery Extension
+
+An extension that works with Todd Dominey's excellent SlideShowPro (SSP)
+Flash component to easily create Flash-based media galleries for your
+Radiant site.
+
+**********
+THIS EXTENSION IS CURRENTLY UNDER ACTIVE DEVELOPMENT.
+USE AT YOUR OWN RISK.
+**********
+
+NOTE THAT SSP IS A COMMERCIAL PRODUCT -- SEE PURCHASE INFORMATION BELOW
+
+After installation be sure to update Radiant!
+
+  rake radiant:extensions:flash_gallery:update
+  rake radiant:extensions:flash_gallery:migrate
+
+You'll also need to purchase a copy of SSP from http://slideshowpro.net
+Unfortunately it's not OSS. However, there is a free trial version
+available that includes a standalone version suitable for testing this
+extension. (***NEED TO VERIFY***)
+
+Once you've purchased SSP, copy slideshowpro.swf (or your customized
+version of the SWF file) to your public/galleries directory.
+
+You can then add new galleries and media items using the administrative
+interface in Radiant. To display them in SSP, just use the supplied
+Radius tag:
+
+<r:gallery name="gallery_name" />
+
+This extension contains the Paperclip Rails plugin v2.1.5 (c) 2008 Thoughtbot. 
+All other code (c) 2008 Nick Plante.
+
+http://github.com/zapnap/radiant-flash-gallery-extension
