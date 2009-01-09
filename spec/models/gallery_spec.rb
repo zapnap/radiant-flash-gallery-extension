@@ -44,7 +44,7 @@ describe Gallery do
 
     it "should include gallery and album tags" do
       @gallery.to_xml.should have_tag('gallery') do
-        with_tag("album[lgPath=#{@xml_location.gsub('.xml', '')}]")
+        with_tag("album[title=#{@gallery.title}]")
       end
     end
 

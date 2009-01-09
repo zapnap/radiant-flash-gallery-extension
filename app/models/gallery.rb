@@ -10,7 +10,7 @@ class Gallery < ActiveRecord::Base
 
   def to_xml
     out = "<?xml version='1.0' encoding='UTF-8'?><gallery>"
-    out += "<album lgPath='#{gallery_path}' tnPath='' title='#{title}' description='#{description}' tn=''>"
+    out += "<album lgPath='' tnPath='' title='#{title}' description='#{description}' tn=''>"
 
     gallery_items.each do |item|
       out += "<img src='#{item.asset.url}' title='#{item.title}' caption='#{item.caption}' link='#{item.link}' target='_self' pause='' />"
