@@ -54,10 +54,20 @@ describe Gallery do
       @gallery.to_xml.should have_tag('img', :count => 2)
     end
 
-    it "should publish the xml" do
+    it "should be published" do
       @gallery.publish
       File.exists?("#{RAILS_ROOT}/public#{@xml_location}").should be_true
       File.read("#{RAILS_ROOT}/public#{@xml_location}").should == @gallery.to_xml
+    end
+
+    it "should automatically be published after changes" do
+      @gallery.should_receive(:publish).and_return(true)
+      @gallery.save
+    end
+
+    it "should automatically be deleted after the model is destroyed" do
+      @gallery.should_receive(:unpublish).and_return(true)
+      @gallery.destroy
     end
   end
 

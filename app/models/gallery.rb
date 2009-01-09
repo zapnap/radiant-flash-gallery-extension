@@ -7,6 +7,8 @@ class Gallery < ActiveRecord::Base
   validates_uniqueness_of :title
 
   before_validation_on_create :generate_file_name, :set_default_swf
+  after_save :publish
+  after_destroy :unpublish
 
   def to_xml
     out = "<?xml version='1.0' encoding='UTF-8'?><gallery>"
@@ -21,15 +23,27 @@ class Gallery < ActiveRecord::Base
 
   # write the file to the specified disk location
   def publish
-    File.open("#{RAILS_ROOT}/public#{self.xml_file_name}", 'w') do |f|
+    File.open(full_xml_file_path, 'w') do |f|
       f.write self.to_xml
     end
   end
 
   private
 
+  def unpublish
+    File.delete(full_xml_file_path) if File.exists?(full_xml_file_path)
+  end
+
   def gallery_path
     "#{FlashGalleryExtension::GALLERY_PATH}/#{(title || '').to_permalink}"
+  end
+
+  def full_gallery_path
+    "#{RAILS_ROOT}/public#{gallery_path}"
+  end
+
+  def full_xml_file_path
+    "#{RAILS_ROOT}/public#{xml_file_name}"
   end
 
   def generate_file_name

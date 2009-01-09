@@ -33,6 +33,16 @@ describe GalleryItem do
   #  @gallery_item.errors.on(:asset).should == "is not one of the allowed file types."
   #end
 
+  it "should republish the associated xml file after save" do
+    @gallery_item.gallery.should_receive(:publish).and_return(true)
+    @gallery_item.save
+  end
+
+  it "should republish the associated xml file after destroy" do
+    @gallery_item.gallery.should_receive(:publish).and_return(true)
+    @gallery_item.destroy
+  end
+
   private
 
   def valid_attributes

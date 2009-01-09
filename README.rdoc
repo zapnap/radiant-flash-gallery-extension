@@ -4,11 +4,6 @@ An extension that works with Todd Dominey's excellent SlideShowPro (SSP)
 Flash component to easily create Flash-based media galleries for your
 Radiant site.
 
-**********
-THIS EXTENSION IS CURRENTLY UNDER ACTIVE DEVELOPMENT.
-USE AT YOUR OWN RISK.
-**********
-
 NOTE THAT SSP IS A COMMERCIAL PRODUCT -- SEE PURCHASE INFORMATION BELOW
 
 After installation be sure to update Radiant!
@@ -23,9 +18,8 @@ extension (it limits you to displaying only 3 images/videos).
 
 To use it, copy slideshowpro.swf or your customized version of the SWF
 to the public/galleries directory. You can then add new galleries and
-media items using the administrative interface in Radiant. Make sure to
-publish the galleries once you're ready to proceed. Then, to display
-them in SSP, just use the supplied Radius tag:
+media items using the administrative interface in Radiant. To display
+them, just use the supplied Radius tag:
 
     <r:gallery name="gallery_name" />
 
