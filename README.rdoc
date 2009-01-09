@@ -13,8 +13,8 @@ NOTE THAT SSP IS A COMMERCIAL PRODUCT -- SEE PURCHASE INFORMATION BELOW
 
 After installation be sure to update Radiant!
 
-  rake radiant:extensions:flash_gallery:update
-  rake radiant:extensions:flash_gallery:migrate
+    rake radiant:extensions:flash_gallery:update
+    rake radiant:extensions:flash_gallery:migrate
 
 You'll also need to purchase a copy of SSP from http://slideshowpro.net
 Unfortunately it's not OSS. However, there is a free trial version
@@ -27,7 +27,7 @@ media items using the administrative interface in Radiant. Make sure to
 publish the galleries once you're ready to proceed. Then, to display
 them in SSP, just use the supplied Radius tag:
 
-<r:gallery name="gallery_name" />
+    <r:gallery name="gallery_name" />
 
 This extension contains the Paperclip Rails plugin v2.1.5 (c) 2008 Thoughtbot. 
 All other code (c) 2008 Nick Plante.
