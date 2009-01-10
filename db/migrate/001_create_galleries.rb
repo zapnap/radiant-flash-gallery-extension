@@ -5,6 +5,9 @@ class CreateGalleries < ActiveRecord::Migration
       t.string   :description
       t.string   :xml_file_name
       t.string   :swf_file_name
+      t.string   :swf_content_type
+      t.integer  :swf_file_size
+      t.datetime :swf_updated_at
       t.timestamps
     end
 

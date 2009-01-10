@@ -16,10 +16,10 @@ Unfortunately it's not OSS. However, there is a free trial version
 available that includes a standalone version suitable for testing this
 extension (it limits you to displaying only 3 images/videos).
 
-To use it, copy slideshowpro.swf or your customized version of the SWF
-to the public/galleries directory. You can then add new galleries and
-media items using the administrative interface in Radiant. To display
-them, just use the supplied Radius tag:
+Add new galleries and media items using the Radiant administrative
+interface. The SWF file that you upload should either be slideshowpro.swf
+or your own customized version of the slide show container. To display 
+media items within your gallery, use the supplied Radius tag:
 
     <r:gallery name="gallery_name" />
 

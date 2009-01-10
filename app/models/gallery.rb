@@ -2,11 +2,16 @@ require 'string_ext'
 
 class Gallery < ActiveRecord::Base
   has_many :gallery_items
+  has_attached_file :swf, 
+    :path => ':rails_root/public/galleries/containers/:id/:style/:basename.:extension',
+    :url  => '/galleries/containers/:id/:style/:basename.:extension'
 
   validates_presence_of :title
   validates_uniqueness_of :title
+  validates_attachment_presence :swf
+  validates_attachment_content_type :swf, :content_type => 'application/x-shockwave-flash'
 
-  before_validation_on_create :generate_file_name, :set_default_swf
+  before_validation_on_create :generate_file_name
   after_save :publish
   after_destroy :unpublish
 
@@ -48,9 +53,5 @@ class Gallery < ActiveRecord::Base
 
   def generate_file_name
     self.xml_file_name = "#{gallery_path}.xml" unless title.nil?
-  end
-
-  def set_default_swf
-    self.swf_file_name = "#{FlashGalleryExtension::GALLERY_PATH}/#{FlashGalleryExtension::DEFAULT_SWF}" if swf_file_name.nil?
   end
 end

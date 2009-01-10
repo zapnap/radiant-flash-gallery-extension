@@ -1,11 +1,13 @@
 class Admin::GalleriesController < ApplicationController
+  helper 'admin/gallery_items'
+
   def index
     @galleries = Gallery.find(:all, :order => "title")
     render(:action => 'index')
   end
 
   def new
-    @gallery = Gallery.new(:swf_file_name => "#{FlashGalleryExtension::GALLERY_PATH}/#{FlashGalleryExtension::DEFAULT_SWF}")
+    @gallery = Gallery.new
     render(:action => 'edit')
   end
 

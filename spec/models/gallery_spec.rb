@@ -1,10 +1,14 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
+SWF_TEST_FILE = File.dirname(__FILE__) + '/../files/test.swf'
+
 describe Gallery do
   before(:each) do
     @gallery = Gallery.new(valid_attributes)
+    @uploaded_file = ActionController::TestUploadedFile.new(SWF_TEST_FILE,'application/x-shockwave-flash')
+    @gallery.swf = @uploaded_file
+
     @xml_location = "#{FlashGalleryExtension::GALLERY_PATH}/happy_fun_gallery.xml"
-    @swf_location = "#{FlashGalleryExtension::GALLERY_PATH}/#{FlashGalleryExtension::DEFAULT_SWF}"
   end
 
   it "should be valid" do
@@ -24,6 +28,18 @@ describe Gallery do
       @gallery.should_not be_valid
       @gallery.errors.on(:title).should == "has already been taken"
     end
+
+    it "should have a valid attachment" do
+      @gallery.swf = nil
+      @gallery.should_not be_valid
+      @gallery.errors.on(:swf).should == "must be set."
+    end
+
+    it "should check content type of attachment" do
+      @gallery.swf = ActionController::TestUploadedFile.new(SWF_TEST_FILE, 'application/pdf')
+      @gallery.should_not be_valid
+      @gallery.errors.on(:swf).should == "is not one of the allowed file types."
+    end
   end
 
   it "should generate a slugged file name" do
@@ -31,11 +47,6 @@ describe Gallery do
     @gallery.xml_file_name.should == @xml_location
   end
   
-  it "should set a default swf file name" do
-    @gallery.save
-    @gallery.swf_file_name.should == @swf_location
-  end
-
   context "xml output" do
     before(:each) do
       File.delete("#{RAILS_ROOT}/public#{@xml_location}") if File.exists?("#{RAILS_ROOT}/public#{@xml_location}")

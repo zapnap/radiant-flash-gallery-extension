@@ -14,9 +14,20 @@
       width: 100%
       display: block
 
+    input.file
+      margin: 50px 0
+
+    img.asset
+      margin: 5px 0
+      border: 2px solid #fff
+
+    a.asset
+      display: block
+      margin: 5px 0
+
 %h1= @gallery.new_record? ? 'New Gallery' : 'Edit Gallery'
 
-- form_for [:admin, @gallery] do |f|
+- form_for [:admin, @gallery], :html => {:multipart => true} do |f|
   .form-area
     %p.title
       %label Title
@@ -25,8 +36,10 @@
       %label Description
       = f.text_area :description, :class => 'textarea'
     %p.title
-      %label Location of SlideShowPro SWF File
-      = f.text_field :swf_file_name, :class => 'textbox'
+      %label SlideShowPro SWF File
+      = gallery_item_asset_tag(@gallery.swf, :class => 'asset') if @gallery.swf.exists?
+      %br
+      = f.file_field :swf, :class => 'button'
     
   %p.buttons
     - button_text = @gallery.new_record? ? 'Create' : 'Save Changes'

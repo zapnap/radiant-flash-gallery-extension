@@ -3,7 +3,6 @@
 
 class FlashGalleryExtension < Radiant::Extension
   GALLERY_PATH = '/galleries'
-  DEFAULT_SWF  = 'slideshowpro.swf'
 
   version "0.1"
   description "Create and manage Flash image/media galleries with SlideShowPro" 
