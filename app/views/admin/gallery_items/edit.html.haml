@@ -20,7 +20,7 @@
       display: block
       margin: 5px 0
 
-%h1= @gallery_item.new_record? ? 'New Testimonial' : 'Edit Testimonial'
+%h1= @gallery_item.new_record? ? 'New Gallery Item' : 'Edit Gallery Item'
 
 - form_for_gallery_item(@gallery_item) do |f|
   .form-area
