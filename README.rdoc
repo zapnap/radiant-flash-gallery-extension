@@ -21,7 +21,7 @@ interface. The SWF file that you upload should either be slideshowpro.swf
 or your own customized version of the slide show container. To display 
 media items within your gallery, use the supplied Radius tag:
 
-    <r:gallery name="gallery_name" />
+    <r:gallery name="gallery_name" height="300" width="200" />
 
 This extension contains the Paperclip Rails plugin v2.1.5 (c) 2008 Thoughtbot. 
 All other code (c) 2008 Nick Plante.
