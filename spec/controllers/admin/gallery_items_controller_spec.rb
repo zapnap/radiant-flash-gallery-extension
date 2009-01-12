@@ -96,4 +96,19 @@ describe Admin::GalleryItemsController do
       response.should redirect_to(admin_gallery_items_path(@gallery))
     end
   end
+
+  context 'positions' do
+    before(:each) do
+      @gallery.gallery_items.stub!(:find).and_return(@gallery_item = mock_model(GalleryItem))
+    end
+
+    %w{move_to_top move_higher move_lower move_to_bottom}.each do |action|
+      it "should #{action.humanize} and redirect" do
+        @gallery_item.should_receive(action)
+        post action, :gallery_id => 1, :id => 1
+        response.should be_redirect
+        response.should redirect_to(admin_gallery_items_path(@gallery))
+      end
+    end
+  end
 end

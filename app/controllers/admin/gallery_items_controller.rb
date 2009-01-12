@@ -2,7 +2,7 @@ class Admin::GalleryItemsController < ApplicationController
   before_filter :set_gallery
 
   def index
-    @gallery_items = @gallery.gallery_items
+    @gallery_items = @gallery.gallery_items.find(:all, :order => 'position, created_at')
     render(:action => 'index')
   end
 
@@ -45,6 +45,14 @@ class Admin::GalleryItemsController < ApplicationController
     redirect_to(admin_gallery_items_path)
   end
 
+  %w{move_to_top move_higher move_lower move_to_bottom}.each do |action|
+    define_method action do
+      @gallery_item = @gallery.gallery_items.find(params[:id])
+      @gallery_item.send(action)
+      redirect_to(admin_gallery_items_path)
+    end
+  end
+  
   private
 
   def set_gallery

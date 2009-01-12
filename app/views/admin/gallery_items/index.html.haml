@@ -10,10 +10,10 @@
         &:hover
           background: #efefff
 
-    th.remove
+    th.remove, th.order
       width: 100px
 
-    td.remove
+    td.remove, td.order
       width: 100px
       font-size: 0.8em
       vertical-align: center
@@ -36,10 +36,11 @@
       %th.title Title
       %th.link Link
       %th.modify Modify
+      %th.order Order
   %tbody
     - if @gallery_items.empty?
       %tr
-        %td.note{:colspan => 3} No Gallery Items
+        %td.note{:colspan => 4} No Gallery Items
     - else 
       - @gallery_items.each do |item|
         %tr.node.level-1{:id => "gallery-item-#{item.id}"}
@@ -50,5 +51,7 @@
           %td.link= "#{item.link}"
           %td.remove
             = link_to("#{image('minus.png')} Remove", admin_gallery_item_url(@gallery, item), :method => :delete, :alt => 'remove gallery item', :confirm => 'Are you sure? This will delete the gallery item!')
+          %td.order
+            = order_links(item)
 
 %p.new= link_to('New Gallery Item', new_admin_gallery_item_url(@gallery))

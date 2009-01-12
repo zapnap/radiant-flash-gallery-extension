@@ -23,7 +23,8 @@ media items within your gallery, use the supplied Radius tag:
 
     <r:gallery name="gallery_name" height="300" width="200" />
 
-This extension contains the Paperclip Rails plugin v2.1.5 (c) 2008 Thoughtbot. 
-All other code (c) 2008 Nick Plante.
+This extension contains the Paperclip Rails plugin v2.1.5 (c) 2009 Thoughtbot. 
+It also includes assets from the Radiant Reorder extension (c) 2009 Sean Cribbs.
+All other code (c) 2009 Nick Plante.
 
 http://github.com/zapnap/radiant-flash-gallery-extension

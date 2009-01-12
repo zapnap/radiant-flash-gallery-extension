@@ -61,7 +61,7 @@ describe Gallery do
 
     it "should include gallery items" do
       item1 = item2 = mock('GalleryItem', :null_object => true)
-      @gallery.stub!(:gallery_items).and_return([item1, item2])
+      @gallery.gallery_items.should_receive(:find).with(:all, :order => 'position, created_at').and_return([item1, item2])
       @gallery.to_xml.should have_tag('img', :count => 2)
     end
 

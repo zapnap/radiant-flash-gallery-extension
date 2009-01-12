@@ -6,6 +6,17 @@ module Admin::GalleryItemsHelper
     form_for(:gallery_item, @gallery_item, :url => url, :html => html_options, &block)
   end
 
+  # display links for reordering
+  def order_links(gallery_item)
+    returning String.new do |output|
+      %w{move_to_top move_higher move_lower move_to_bottom}.each do |action|
+        output << link_to(image("#{action}.png", :alt => action.humanize), 
+                          self.send("#{action}_admin_gallery_item_url", gallery_item.gallery, gallery_item),
+                          :method => :post)
+      end
+    end
+  end
+
   # treats swf files as a special case; otherwise assumes asset is an image
   def gallery_item_asset_tag(asset, options = {})
     if asset.url.match(/^.*\.swf?(\?\d*)$/)
