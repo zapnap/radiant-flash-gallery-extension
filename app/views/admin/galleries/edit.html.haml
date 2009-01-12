@@ -37,7 +37,7 @@
       = f.text_area :description, :class => 'textarea'
     %p.title
       %label SlideShowPro SWF File
-      = gallery_item_asset_tag(@gallery.swf, :class => 'asset') if @gallery.swf.exists?
+      = link_to('Flash Gallery [preview]', admin_gallery_url(@gallery), :target => '_blank', :class => 'asset') if @gallery.swf.exists?
       %br
       = f.file_field :swf, :class => 'button'
     

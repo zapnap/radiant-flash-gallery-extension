@@ -3,8 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe Admin::GalleryItemsController do
   scenario :users
 
-  integrate_views
-
   before(:each) do
     login_as :existing
     @gallery = mock_model(Gallery, :to_param => 1, :gallery_items => [])

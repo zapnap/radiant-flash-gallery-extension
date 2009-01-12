@@ -22,6 +22,12 @@ class Admin::GalleriesController < ApplicationController
     end
   end
 
+  def show
+    @gallery = Gallery.find(params[:id])
+    @preview = Page.new.send(:parse, "<r:gallery name='#{@gallery.title}' height='100%' width='100%'/>")
+    render(:action => 'preview', :layout => false)
+  end
+
   def edit
     @gallery = Gallery.find(params[:id])
     render(:action => 'edit')

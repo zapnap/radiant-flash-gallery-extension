@@ -3,8 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe Admin::GalleriesController do
   scenario :users
 
-  integrate_views
-
   before(:each) do
     login_as :existing
   end
@@ -47,6 +45,27 @@ describe Admin::GalleriesController do
       response.should be_success
       response.should render_template('edit')
       flash[:error].should_not be_nil
+    end
+  end
+
+  context 'show' do # preview
+    integrate_views
+
+    before(:each) do
+      Page.stub!(:new).and_return(@page = mock_model(Page, :null_object => true))
+      Gallery.stub!(:find).and_return(@gallery = mock_model(Gallery, :title => 'title'))
+    end
+
+    it 'should render the preview template' do
+      get 'show', :id => 1
+      response.should be_success
+      response.should render_template('preview')
+    end
+
+    it 'should render the tag to preview gallery output' do
+      @page.should_receive(:send).with(:parse, anything()).and_return("<div id='flash'></div>")
+      get 'show', :id => 1
+      response.should have_tag('div#flash')
     end
   end
 
