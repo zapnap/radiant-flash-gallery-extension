@@ -12,7 +12,7 @@ module FlashGalleryTags
   }
   tag 'gallery' do |tag|
     if (gallery = Gallery.find_by_title(tag.attr['name'])) && (height = tag.attr['height']) && (width = tag.attr['width'])
-      out = "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0' id='#{tag.attr['id'] || gallery.title.to_permalink}'>"
+      out = "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0' height='#{height}' width='#{width}' id='#{tag.attr['id'] || gallery.title.to_permalink}'>"
       out += "<param name='movie' value='#{gallery.swf.url}' />"
       out += "<param name='quality' value='high' />"
       out += "<param name='height' value='#{height}' />"
